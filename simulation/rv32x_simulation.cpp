@@ -17,6 +17,26 @@
 #include <stdarg.h>
 #include <byteswap.h>
 
+static const char *basename(const char *path)
+{
+	// 最後の'/'の位置を見つける
+	const char *lastSlash = strrchr(path, '/');
+
+	if (lastSlash != NULL)
+	{
+		// '/'の後ろがファイル名の先頭なのでそれを出力
+		return lastSlash + 1;
+	}
+	else
+	{
+		// '/'が見つからなかった場合はそのままの文字列を出力
+		return path;
+	}
+}
+
+typedef int (*__compar_fn_t)(const void *, const void *);
+typedef __compar_fn_t comparison_fn_t;
+
 #ifdef __cplusplus
 extern "C"
 {

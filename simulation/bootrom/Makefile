@@ -1,9 +1,9 @@
-RISCV_PREFIX=riscv32-unknown-elf-
+RISCV_PREFIX=riscv32-unknown-linux-gnu-
 AS=$(RISCV_PREFIX)as
 LD=$(RISCV_PREFIX)ld
 GCC=$(RISCV_PREFIX)gcc
 OBJCOPY=$(RISCV_PREFIX)objcopy
-LOADEROPT=-DBINSIZE\=0	#-DHEAD=で開始アドレス -DBINSIZE=でロードするバイナリのサイズ、０だとロードルーチンを実行しない -DBINSTARTでバイナリの置いてあるセクタを指定
+LOADEROPT=-DBINSIZE=0
 
 all: bootrom.hex
 

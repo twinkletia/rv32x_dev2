@@ -1,13 +1,13 @@
-RISCV_PREFIX=riscv32-unknown-elf-
+RISCV_PREFIX=riscv32-unknown-linux-gnu-
 CC=$(RISCV_PREFIX)gcc
 VERSION=$(shell $(CC) -dumpversion)
-CFLAGS=-nostartfiles -nostdlib -nostdinc -march=rv32ima_zicsr_zifencei -mabi=ilp32 -I/opt/riscv/riscv32-unknown-elf/include -I/opt/riscv/lib/gcc/riscv32-unknown-elf/$(VERSION)/include -static
+CFLAGS=-nostartfiles -nostdlib -nostdinc -march=rv32ima_zicsr_zifencei -mabi=ilp32 -I/opt/riscv/riscv32-unknown-linux-gnu/include -I/opt/riscv/lib/gcc/riscv32-unknown-linux-gnu/$(VERSION)/include -static
 AS=$(RISCV_PREFIX)as
 AR=$(RISCV_PREFIX)ar
 RANLIB=$(RISCV_PREFIX)ranlib
 LD=$(RISCV_PREFIX)ld
 # Used for link executable 
-LDFLAGS=-L. -L/opt/riscv/riscv32-unknown-elf/lib -lcrt0 -lc -lgloss_riscvx -lgloss -lg -Tlink.ld
+LDFLAGS=-L. -L/opt/riscv/riscv32-unknown-linux-gnu/lib -lcrt0 -lc -lgloss_riscvx -lgloss -lg -Tlink.ld
 OBJCOPY=$(RISCV_PREFIX)objcopy
 
 

@@ -121,7 +121,7 @@ def main():
 	for i in unexpected_to_fail_tests: 
 		print('\t{}'.format(i))
 	print('-'*100)
-	subprocess.run(['stty', 'echo'])
+#	subprocess.run(['stty', 'echo'])
 	return exit_code
 if __name__ == '__main__':
 	NO_LOG = str(sys.argv[1])

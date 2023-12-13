@@ -590,22 +590,6 @@ public:
 			dump();
 			if (rising_edge)
 			{
-				ssize_t nr;
-				int ch = -1;
-				core->uart_wdata = 0;
-				ch = getchar();
-				if (ch != EOF)
-				{
-					core->uart_wdata = ch;
-					core->uart_write = 1;
-				}
-				else
-				{
-					core->uart_write = 0;
-				}
-			}
-			if (rising_edge)
-			{
 #ifdef HTIF
 				if (core->sim_done && !no_sim_exit)
 				{
@@ -1562,12 +1546,6 @@ int main(int argc, char **argv)
 	env.tmio = &stmio;
 	env.procs = &proc0;
 
-	fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
-	tcgetattr(STDIN_FILENO, &tmio);
-	stmio = tmio;
-	tmio.c_lflag &= ~(ECHO | ICANON);
-	tcsetattr(STDIN_FILENO, TCSANOW, &tmio);
-	on_exit(sim_exit, &env);
 	// Verilated::commandArgs(argc, argv);
 	Verilated::traceEverOn(true);
 	proc0 = new processor_t("core\t0");
@@ -1605,7 +1583,6 @@ void sim_exit(int status, void *p)
 {
 	env_t *env;
 	env = (env_t *)p;
-	tcsetattr(STDIN_FILENO, TCSANOW, env->tmio);
 	if ((*(env->procs)) != NULL)
 	{
 		(*(env->procs))->dumpMemory();

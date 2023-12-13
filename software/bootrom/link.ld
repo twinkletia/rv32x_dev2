@@ -18,5 +18,4 @@ SECTIONS
   .bss : { *(.bss) } > ROM
   . = ALIGN(0x4);
   __bss_end = .;
-  .dtb : { *(.dtb) } > ROM
 }
